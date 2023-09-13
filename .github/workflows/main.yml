@@ -6,7 +6,7 @@ env:
   PG_PASSWORD: postgres
 jobs:
   # Label of the container job
-  container-job:
+  run-tests:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
 
@@ -38,13 +38,10 @@ jobs:
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
-        run: cd l10 && npm install
+        run: cd l10 && npm ci
 
       - name: Run unit tests
-        # Runs a script that creates a PostgreSQL table, populates
-        # the table with data, and then retrieves the data.
         run: cd l10 && npm test
-        # Environment variables used by the `client.js` script to create a new PostgreSQL table.
       - name: Run the app
         id: run-app
         run: |
@@ -57,8 +54,6 @@ jobs:
           sleep 5
 
       - name: Run integration tests
-        # Runs a script that creates a PostgreSQL table, populates
-        # the table with data, and then retrieves the data.
         run: |
           cd l10
           npm install cypress cypress-json-results
