@@ -1,6 +1,9 @@
 name: Auto test L10 solution
 on: push
-
+env:
+  PG_DATABASE: wd-todo-test
+  PG_USER: postgres
+  PG_PASSWORD: postgres
 jobs:
   # Label of the container job
   container-job:
@@ -17,13 +20,17 @@ jobs:
         image: postgres
         # Provide the password for postgres
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: wd-todo-test
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
       # Downloads a copy of the code in your repository before running CI tests
