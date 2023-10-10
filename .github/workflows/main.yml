@@ -54,4 +54,4 @@ jobs:
         run: |
           cd l10
           npm install cypress
-          npx cypress run --env STUDENT_SUBMISSION_URL="http://localhost:3000/"
+          npm run cy:test -- --env STUDENT_SUBMISSION_URL="http://localhost:3000/"
