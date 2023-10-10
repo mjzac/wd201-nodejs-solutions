@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
-    "clean:start": "npm run clean && npm start",
+    "clean:start": "npm run pretest && NODE_ENV=test npm start",
     "start": "nodemon -e js,ejs",
     "pretest": "NODE_ENV=test npx sequelize-cli db:drop && NODE_ENV=test npx sequelize-cli db:create && NODE_ENV=test npx sequelize-cli db:migrate",
     "test": "NODE_ENV=test jest --json --outputFile=results.json --detectOpenHandles --coverage"
